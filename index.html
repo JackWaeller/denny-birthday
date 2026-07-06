@@ -33,31 +33,31 @@
         }
 
         @keyframes warpDrive {
-            0% { left: -280px; top: 20%; opacity: 0; transform: scale(0.7); }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { left: 100%; top: 30%; opacity: 0; transform: scale(1.1); }
+            0% { left: -400px; top: 15%; opacity: 0; transform: scale(0.8); }
+            10% { opacity: 0.65; }
+            90% { opacity: 0.65; }
+            100% { left: 100%; top: 25%; opacity: 0; transform: scale(1.2); }
         }
         
-        /* Container deutlich vergrößert für ein mächtigeres Schiff */
+        /* Gigantischer Container für maximale Sichtbarkeit */
         .defiant-container {
             position: fixed;
-            width: 260px;
+            width: 380px; 
             pointer-events: none;
-            animation: warpDrive 14s linear infinite;
+            animation: warpDrive 15s linear infinite;
             z-index: 0;
             text-align: center;
         }
 
-        /* Schriftzug vergrößert und fetter für optimale Lesbarkeit */
+        /* Riesiger, unübersehbarer Schriftzug */
         .defiant-label {
             color: #5599ff;
             font-family: 'Courier New', monospace;
-            font-size: 16px;
+            font-size: 24px; 
             font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-            text-shadow: 0 0 8px rgba(0,85,255,0.9);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0,85,255,0.9);
             white-space: nowrap;
         }
 
@@ -208,6 +208,7 @@
 
 <div class="defiant-container">
     <div class="defiant-label">U.S.S. DEFIANT</div>
+    <!-- SVG-Breite auf 100% zwingt die Grafik, die vollen 380px des Containers auszufüllen -->
     <svg viewBox="0 0 120 80" width="100%" height="auto">
         <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
         <path d="M 15,45 Q 35,47 55,50 Q 35,43 15,45" fill="#0077ff" opacity="0.6"/>
