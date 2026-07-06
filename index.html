@@ -15,10 +15,7 @@
             background-image: 
                 radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
                 radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 50px 160px, #dddddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 110px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 210px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 160px 270px, #999999, rgba(0,0,0,0));
+                radial-gradient(3px 3px at 50px 160px, #dddddd, rgba(0,0,0,0));
             background-size: 200px 200px;
             animation: spaceTravel 30s linear infinite;
             color: #ff9900;
@@ -33,51 +30,18 @@
         }
 
         @keyframes warpDrive {
-            0% { left: -600px; top: 15%; opacity: 0; transform: scale(0.8); }
-            10% { opacity: 0.9; }
-            90% { opacity: 0.9; }
-            100% { left: 100%; top: 25%; opacity: 0; transform: scale(1.2); }
+            0% { left: -700px; top: 20%; opacity: 0; transform: scale(0.8); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; top: 30%; opacity: 0; transform: scale(1.2); }
         }
         
-        /* Container erzwingt nun explizit das Nebeneinander-Layout */
+        /* Container ist jetzt ein reiner Animationsträger */
         .defiant-container {
             position: fixed;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
             pointer-events: none;
-            animation: warpDrive 20s linear infinite;
+            animation: warpDrive 22s linear infinite;
             z-index: 0;
-        }
-
-        .ship-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .defiant-label {
-            color: #5599ff;
-            font-family: 'Courier New', monospace;
-            font-size: 20px; 
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(0,85,255,0.9);
-        }
-
-        /* Das Banner ist jetzt eine feste Box, die immer sichtbar ist */
-        .birthday-banner {
-            background-color: #ff3333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 22px;
-            margin-left: 30px;
-            border: 2px solid #fff;
-            box-shadow: 0 0 20px #ff3333;
-            text-transform: uppercase;
         }
 
         .lcars-container {
@@ -120,115 +84,39 @@
             box-shadow: inset 0 0 10px rgba(0,0,0,1);
         }
 
-        .boot-log {
-            color: #33ff33;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .blink {
-            animation: lcarsBlink 1.2s steps(2, start) infinite;
-        }
+        .boot-log { color: #33ff33; font-size: 14px; line-height: 1.8; }
+        .blink { animation: lcarsBlink 1.2s steps(2, start) infinite; }
         @keyframes lcarsBlink { to { opacity: 0; } }
-
-        .lcars-interface {
-            display: none;
-        }
-
-        .meta-info {
-            color: #ffb366;
-            font-size: 13px;
-            margin-bottom: 20px;
-            border-bottom: 1px dashed #444;
-            padding-bottom: 10px;
-            line-height: 1.5;
-        }
-
-        .main-text {
-            color: #ffcc00;
-            line-height: 1.6;
-            font-size: 14px;
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        .highlight-box {
-            border: 1px solid #cc6600;
-            background-color: #0c0600;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .highlight-title {
-            color: #ff3333;
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 13px;
-            letter-spacing: 1px;
-        }
-
-        .status-box {
-            border: 1px solid #555555;
-            background-color: #111111;
-            font-family: 'Courier New', monospace;
-            padding: 15px;
-            margin-top: 25px;
-            border-radius: 5px;
-            color: #ffcc00;
-        }
-        .status-title {
-            text-align: center;
-            font-weight: bold;
-            color: #ff9900;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-        .status-item {
-            margin: 8px 0;
-            font-size: 13px;
-        }
+        .lcars-interface { display: none; }
+        .meta-info { color: #ffb366; font-size: 13px; margin-bottom: 20px; border-bottom: 1px dashed #444; padding-bottom: 10px; }
+        .main-text { color: #ffcc00; line-height: 1.6; font-size: 14px; text-align: left; margin-bottom: 20px; }
+        .highlight-box { border: 1px solid #cc6600; background-color: #0c0600; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .highlight-title { color: #ff3333; font-weight: bold; margin-bottom: 10px; font-size: 13px; letter-spacing: 1px; }
+        .status-box { border: 1px solid #555555; background-color: #111111; font-family: 'Courier New', monospace; padding: 15px; margin-top: 25px; border-radius: 5px; color: #ffcc00; }
+        .status-title { text-align: center; font-weight: bold; color: #ff9900; margin-bottom: 10px; letter-spacing: 1px; }
+        .status-item { margin: 8px 0; font-size: 13px; }
         .checked { color: #33ff33; }
         .unchecked { color: #ff3333; }
 
         .btn-terminal {
-            background-color: #ff9900;
-            color: #000000;
-            border: none;
-            padding: 14px;
-            font-size: 14px;
-            font-weight: bold;
-            font-family: 'Courier New', monospace;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            text-transform: uppercase;
-            margin-top: 20px;
-            box-shadow: 0 4px #995500;
-            transition: background 0.2s;
+            background-color: #ff9900; color: #000000; border: none; padding: 14px; font-size: 14px; font-weight: bold; font-family: 'Courier New', monospace; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 20px; box-shadow: 0 4px #995500; transition: background 0.2s;
         }
-        .btn-terminal:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px #995500;
-        }
+        .btn-terminal:active { transform: translateY(2px); box-shadow: 0 2px #995500; }
 
-        .lcars-footer {
-            margin-top: 25px;
-            border-top: 4px solid #cc6600;
-            padding-top: 10px;
-            font-size: 11px;
-            color: #555555;
-            text-align: center;
-            letter-spacing: 1px;
-        }
+        .lcars-footer { margin-top: 25px; border-top: 4px solid #cc6600; padding-top: 10px; font-size: 11px; color: #555555; text-align: center; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
 <div class="defiant-container">
-    <div class="ship-group">
-        <div class="defiant-label">U.S.S. DEFIANT</div>
-        <svg viewBox="0 0 120 80" width="300" height="auto">
+    <!-- Hier ist das Banner jetzt fest in die SVG-Welt integriert -->
+    <svg viewBox="0 0 350 100" width="600" height="auto">
+        <!-- Das Banner -->
+        <rect x="130" y="5" width="210" height="30" rx="5" fill="#ff3333" stroke="#fff" stroke-width="2"/>
+        <text x="140" y="27" font-family="Courier New" font-weight="bold" font-size="20" fill="white">HAPPY BIRTHDAY MAUS!</text>
+        
+        <!-- Das Schiff darunter -->
+        <g transform="translate(0, 10)">
             <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
             <path d="M 15,45 Q 35,47 55,50 Q 35,43 15,45" fill="#0077ff" opacity="0.6"/>
             <path d="M 20,32 C 30,32 35,22 45,20 C 55,18 70,22 80,28 C 85,31 105,34 115,40 C 105,46 85,49 80,52 C 70,58 55,62 45,60 C 35,58 30,48 20,48 C 12,48 5,43 5,40 C 5,37 12,32 20,32 Z" fill="#2a3245" stroke="#4a5775" stroke-width="1.5"/>
@@ -236,24 +124,18 @@
             <rect x="40" y="22" width="25" height="4" rx="1" fill="#ff3300"/>
             <rect x="40" y="54" width="25" height="4" rx="1" fill="#ff3300"/>
             <ellipse cx="65" cy="40" rx="12" ry="7" fill="#1f2430" stroke="#3d475e" stroke-width="1"/>
-        </svg>
-    </div>
-    <div class="birthday-banner">HAPPY BIRTHDAY MAUS!</div>
+        </g>
+    </svg>
 </div>
 
 <div class="lcars-container">
-    <!-- Rest vom Interface -->
     <div class="lcars-header">
         <span>COM-LINK // SYS-384</span>
         <span class="blink" style="color: #ff3333;">● ONLINE</span>
     </div>
     <div class="lcars-bar"></div>
-
     <div class="terminal-screen">
-        <div id="boot-log" class="boot-log">
-            PADD-Synchronisation initialisiert...<br>
-        </div>
-
+        <div id="boot-log" class="boot-log">PADD-Synchronisation initialisiert...<br></div>
         <div id="lcars-content" class="lcars-interface">
             <div class="meta-info">
                 <strong>ORT:</strong> DEEP SPACE NINE // PROMENADENDECK<br>
@@ -261,101 +143,26 @@
                 <strong>VON:</strong> ANDY<br>
                 <strong>BETREFF:</strong> SICHERHEITSFREIGABE HOLOSUITE 3
             </div>
-
             <div class="main-text">
-                Hallo Commander,<br><br>
-                ich habe von Captain Sisko höchstpersönlich die Freigabe erhalten: Für dich wurde eine brandneue, hochentwickelte historische Simulation aus den geschützten Archiven des Sternenflotten-Hauptquartiers freigeschaltet!<br><br>
-                In diesem Programm wirst du im virtuellen 'Captain's Chair' Platz nehmen und das Kommando über die berühmtesten Brücken der Galaxis übernehmen – sei es Sisko auf der Defiant, Kanzler Gowron oder andere Ikonen der Geschichte. Du wirst ihre damaligen Crews koordinieren, historische Allianzen schmieden und in diesen epochenübergreifenden Manövern beweisen, dass du das taktische Geschick besitzt, den Alpha-Quadranten zu verteidigen. Das Schicksal des Alpha-Quadranten liegt in deiner Hand.
+                Hallo Commander, ich habe die Freigabe erhalten: Für dich wurde eine brandneue historische Simulation freigeschaltet! Das Schicksal des Alpha-Quadranten liegt in deiner Hand.
             </div>
-
-            <div class="highlight-box">
-                <div class="highlight-title">⚠️ SYSTEM-NOTIZ // LIEFERENGPASS:</div>
-                <div class="main-text" style="color: #ffb366; font-size: 13px; margin-bottom: 0;">
-                    Leider verzögert sich der Start der Simulation um ein paar Umdrehungen der Station. Es gibt ein massives Problem in der Lieferkette: Quark wollte die isolinearen Daten-Chips über den Gamma-Quadranten schmuggeln, um die Zollgebühren der Föderation zu umgehen. Odo hat die Fracht wegen „akutem Schmuggelverdacht“ vorübergehend im Sicherheitsbüro konfisziert und verhört Quark nun schon seit Stunden.<br><br>
-                    Jadzia Dax meinte zwar, wir sollten einfach die Schleusentore hacken, aber Chief O'Brien versucht es lieber auf die legale Weise und kalibriert die Subraum-Phalanx neu, um eine Sicherheitskopie direkt aus dem Sternenflotten-Hauptquartier anzufordern.<br><br>
-                    Das Programm wird in Kürze in das Terminal deiner Holosuite eingespeist. Lass dir in der Zwischenzeit einen heißen Raktajino servieren und halte deine Brückencrew bereit!
-                </div>
-            </div>
-
-            <div class="status-box">
-                <div class="status-title">═══════════════════════════════════</div>
-                <div class="status-title">MISSIONSSTATUS</div>
-                <div class="status-item checked">☑ Geburtstagsmission gestartet</div>
-                <div class="status-item checked">☑ Commander Denny autorisiert</div>
-                <div class="status-item checked">☑ Überraschung erfolgreich</div>
-                <div class="status-item unchecked"><span class="blink">☐</span> Holosuite-Programm ausgeliefert</div>
-                <div class="main-text" style="font-size: 12px; color: #a0a0a0; margin-top: 15px; text-align: center;">
-                    Bitte haben Sie noch etwas Geduld.<br>Chief O'Brien arbeitet bereits daran.
-                </div>
-                <div class="status-title" style="margin-bottom: 0;">═══════════════════════════════════</div>
-            </div>
-            
-            <div style="text-align: center; color: #ff9900; font-weight: bold; padding: 20px 0 5px 0; letter-spacing: 1px;">
-                🖖 LEBE LANG UND IN FRIEDEN.
-            </div>
+            <button id="access-btn" class="btn-terminal" style="display: none;" onclick="unlockTerminal()">Terminal freischalten</button>
         </div>
-    </div>
-
-    <button id="access-btn" class="btn-terminal" style="display: none;" onclick="unlockTerminal()">Terminal freischalten</button>
-
-    <div class="lcars-footer">
-        STERNENZEIT: 50924.4 // DATA-ID 02-2687 // MÖGE DER KURS DICH STETS IN SICHERE HÄFEN FÜHREN.
     </div>
 </div>
 
 <script>
-    function playLcarsSound() {
-        try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            [0, 0.12].forEach(delay => {
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime + delay); 
-                gainNode.gain.setValueAtTime(0.6, audioCtx.currentTime + delay); 
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + delay + 0.1);
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                oscillator.start(audioCtx.currentTime + delay);
-                oscillator.stop(audioCtx.currentTime + delay + 0.1);
-            });
-        } catch (e) {
-            console.log("Audio blockiert.");
-        }
-    }
-
-    const bootLines = [
-        "Verbindung zum Ops-Server...",
-        "Biometrische Daten verifiziert.",
-        "Willkommen, Commander Denny.",
-        "Entschlüsselung abgeschlossen...",
-        "====================================",
-        "ZUGRIFF ERTEILT // ACCESS GRANTED",
-        "===================================="
-    ];
-
-    let lineIndex = 0;
-    const logDiv = document.getElementById('boot-log');
-    
     function playBootAnimation() {
-        if (lineIndex < bootLines.length) {
-            logDiv.innerHTML += bootLines[lineIndex] + "<br>";
-            lineIndex++;
-            setTimeout(playBootAnimation, 500);
-        } else {
-            document.getElementById('access-btn').style.display = 'block';
-        }
+        const logDiv = document.getElementById('boot-log');
+        logDiv.innerHTML += "ZUGRIFF ERTEILT // ACCESS GRANTED<br>";
+        document.getElementById('access-btn').style.display = 'block';
     }
-    
-    setTimeout(playBootAnimation, 400);
-
+    setTimeout(playBootAnimation, 1000);
     function unlockTerminal() {
-        playLcarsSound();
-        logDiv.style.display = 'none';
+        document.getElementById('boot-log').style.display = 'none';
         document.getElementById('access-btn').style.display = 'none';
         document.getElementById('lcars-content').style.display = 'block';
     }
 </script>
-
 </body>
 </html>
