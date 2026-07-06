@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starfleet Terminal - Denny</title>
     <style>
-        /* Sternenhintergrund */
         body {
             background-color: #000000;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
+            /* Ein echter, fließender Sternenhintergrund als GIF */
+            background-image: url('https://i.postimg.cc/qM0m7v4L/stars-moving.gif');
+            background-size: cover;
+            background-attachment: fixed;
             color: #ff9900;
             font-family: 'Courier New', Courier, monospace;
-            padding: 15px;
+            padding: 40px 15px;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -25,21 +22,19 @@
             overflow-x: hidden;
         }
 
-        /* Die vorbeifliegende Defiant */
+        /* Die vorbeifliegende Defiant als gut sichtbares Bild */
         @keyframes warpDrive {
-            0% { transform: translate(-100vw, 20vh) scale(0.1); opacity: 0; }
-            5% { opacity: 0.4; }
-            50% { opacity: 0.4; }
-            95% { opacity: 0; }
-            100% { transform: translate(100vw, 10vh) scale(0.4); opacity: 0; }
+            0% { left: -150px; top: 20%; opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { left: 100%; top: 40%; opacity: 0; }
         }
-        .defiant-silhouette {
+        .defiant-ship {
             position: fixed;
-            width: 80px;
+            width: 130px;
             height: auto;
             pointer-events: none;
-            opacity: 0;
-            animation: warpDrive 25s linear infinite;
+            animation: warpDrive 12s linear infinite;
             z-index: 0;
         }
 
@@ -49,9 +44,9 @@
             border: 4px solid #222222;
             border-radius: 20px;
             padding: 20px;
-            max-width: 500px;
+            max-width: 550px;
             width: 100%;
-            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+            box-shadow: 0 0 35px rgba(0,0,0,0.9);
             position: relative;
             z-index: 1;
         }
@@ -78,7 +73,7 @@
 
         .terminal-screen {
             background-color: #050505;
-            border-left: 18px solid #ff9900; /* Typischer LCARS-Balken links */
+            border-left: 18px solid #ff9900; 
             padding: 15px;
             border-radius: 4px;
             box-shadow: inset 0 0 10px rgba(0,0,0,1);
@@ -132,7 +127,7 @@
             letter-spacing: 1px;
         }
 
-        /* Missionsstatus Gimmick Box */
+        /* Missionsstatus Box */
         .status-box {
             border: 1px solid #555555;
             background-color: #111111;
@@ -190,10 +185,8 @@
 </head>
 <body>
 
-<!-- Defiant fliegt im Hintergrund vorbei -->
-<svg class="defiant-silhouette" viewBox="0 0 100 60" fill="#222233">
-    <path d="M50,0 C65,10 75,15 80,25 C85,35 80,50 75,55 C65,52 55,50 50,53 C45,50 35,52 25,55 C20,50 15,35 20,25 C25,15 35,10 50,0 Z M50,15 C45,25 45,35 50,40 C55,35 55,25 50,15 Z"/>
-</svg>
+<!-- U.S.S. Defiant Bild -->
+<img class="defiant-ship" src="https://i.postimg.cc/mD8v9XF3/defiant-silhouette.png" alt="USS Defiant">
 
 <div class="lcars-container">
     <div class="lcars-header">
@@ -230,7 +223,7 @@
                 </div>
             </div>
 
-            <!-- Missionsstatus Gimmick -->
+            <!-- Missionsstatus Box -->
             <div class="status-box">
                 <div class="status-title">═══════════════════════════════════</div>
                 <div class="status-title">MISSIONSSTATUS</div>
@@ -258,25 +251,28 @@
 </div>
 
 <script>
-    // Synthetischer LCARS-Audio-Effekt via Web Audio API
+    // LCARS-Audio-Effekt beim KREATIVEN KLICKEN des Buttons
     function playLcarsSound() {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
             
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(680, audioCtx.currentTime); 
-            oscillator.frequency.exponentialRampToValueAtTime(420, audioCtx.currentTime + 0.12);
-            
-            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            
-            oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.12);
+            // Zweifacher, typischer LCARS-Piepton
+            [0, 0.12].forEach(delay => {
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime + delay); 
+                
+                gainNode.gain.setValueAtTime(0.6, audioCtx.currentTime + delay); 
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + delay + 0.1);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                oscillator.start(audioCtx.currentTime + delay);
+                oscillator.stop(audioCtx.currentTime + delay + 0.1);
+            });
         } catch (e) {
             console.log("Audio blockiert.");
         }
@@ -308,7 +304,7 @@
     setTimeout(playBootAnimation, 400);
 
     function unlockTerminal() {
-        playLcarsSound();
+        playLcarsSound(); // Sound ertönt HIER beim Klick
         logDiv.style.display = 'none';
         document.getElementById('access-btn').style.display = 'none';
         document.getElementById('lcars-content').style.display = 'block';
