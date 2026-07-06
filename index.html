@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfleet Terminal - Denny</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ff9900;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .lcars-container {
+            background-color: #000000;
+            border-radius: 15px;
+            padding: 15px;
+            max-width: 500px;
+            width: 100%;
+        }
+        .lcars-header {
+            border-bottom: 4px solid #ff9900;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .terminal-screen {
+            background-color: #080808;
+            border: 1px solid #331100;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .boot-log {
+            color: #33ff33;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .lcars-interface {
+            display: none;
+        }
+        .meta-info {
+            color: #ffcc00;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border-left: 4px solid #cc6600;
+            padding-left: 10px;
+            line-height: 1.4;
+        }
+        .main-text {
+            color: #ffcc00;
+            line-height: 1.5;
+            font-size: 14px;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .highlight-box {
+            border: 1px solid #ff9900;
+            background-color: #110500;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .highlight-title {
+            color: #ff3333;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .btn-terminal {
+            background-color: #cc6600;
+            color: #000000;
+            border: none;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            margin-top: 15px;
+            box-shadow: 0 4px #883300;
+        }
+        .lcars-footer {
+            margin-top: 20px;
+            border-top: 2px solid #cc6600;
+            padding-top: 10px;
+            font-size: 11px;
+            color: #663300;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="lcars-container">
+    <div class="lcars-header">
+        🪐 DS9 // OPS TERMINAL // SYS-384
+    </div>
+
+    <div class="terminal-screen">
+        <div id="boot-log" class="boot-log">
+            PADD-Synchronisation initialisiert...<br>
+        </div>
+
+        <div id="lcars-content" class="lcars-interface">
+            <div class="meta-info">
+                <strong>ORT:</strong> Tiefe Raumstation 9 / Promenadendeck<br>
+                <strong>AN:</strong> DENNY (Alles Gute zum Geburtstag!)<br>
+                <strong>VON:</strong> Andy<br>
+                <strong>BETREFF:</strong> Sicherheitsfreigabe für Holosuite 3
+            </div>
+
+            <div class="main-text">
+                Hallo Commander,<br><br>
+                ich habe von Captain Sisko höchstpersönlich die Freigabe erhalten: Für dich wurde eine brandneue, hochentwickelte taktische Simulation für die Holosuites freigeschaltet!<br><br>
+                In diesem Programm wirst du das Kommando über legendäre Profile der Galaxis übernehmen – sei es Sisko mit der Crew der Defiant, Kanzler Gowron oder andere Ikonen der Geschichte. Du wirst deine eigene Brückencrew koordinieren, taktische Allianzen schmieden und beweisen, dass du den Alpha-Quadranten verteidigen kannst. Das Schicksal der Simulation liegt in deiner Hand.
+            </div>
+
+            <div class="highlight-box">
+                <div class="highlight-title">⚠️ WICHTIGER FREIGABE-STATUS:</div>
+                <div class="main-text" style="color: #ffb366; font-size: 13px; margin-bottom: 0;">
+                    Leider verzögert sich der Start der Simulation um ein paar Umdrehungen der Station. Es gibt ein massives Problem in der Lieferkette: Quark wollte die Daten-Disks über den Gamma-Quadranten schmuggeln, um die Zollgebühren der Föderation zu umgehen. Odo hat die Fracht wegen „akutem Schmuggelverdacht“ vorübergehend im Sicherheitsbüro konfisziert und verhört Quark nun schon seit Stunden.<br><br>
+                    Jadzya Dax meinte zwar, wir sollten einfach die Schleusentore hacken, aber Chief O'Brien versucht es lieber auf die legale Weise und kalibriert die Subraum-Phalanx neu, um eine Sicherheitskopie direkt aus dem Sternenflotten-Hauptquartier anzufordern.<br><br>
+                    Das Programm materialisiert sich in Kürze in deiner Holosuite. Lass dir in der Zwischenzeit ein heißes Raktajino servieren und halte deine Brückencrew bereit!
+                </div>
+            </div>
+            
+            <div style="text-align: center; color: #ff9900; font-weight: bold; padding: 5px 0;">
+                🖖 LEBE LANG UND IN FRIEDEN.
+            </div>
+        </div>
+    </div>
+
+    <button id="access-btn" class="btn-terminal" style="display: none;" onclick="unlockTerminal()">Terminal freischalten</button>
+
+    <div class="lcars-footer">
+        COMPUTER-EINTRAG ERGÄNZEN // ID 02-2687 // MÖGE DEIN NEUES LEBENSJAHR VOLL TIEFE SEIN.
+    </div>
+</div>
+
+<script>
+    const bootLines = [
+        "Verbindung zum Ops-Server...",
+        "Biometrische Daten verifiziert.",
+        "Willkommen, Commander Denny.",
+        "Entschlüsselung abgeschlossen...",
+        "====================================",
+        "ZUGRIFF ERTEILT // ACCESS GRANTED",
+        "===================================="
+    ];
+
+    let lineIndex = 0;
+    const logDiv = document.getElementById('boot-log');
+    
+    function playBootAnimation() {
+        if (lineIndex < bootLines.length) {
+            logDiv.innerHTML += bootLines[lineIndex] + "<br>";
+            lineIndex++;
+            setTimeout(playBootAnimation, 450);
+        } else {
+            document.getElementById('access-btn').style.display = 'block';
+        }
+    }
+    
+    setTimeout(playBootAnimation, 300);
+
+    function unlockTerminal() {
+        logDiv.style.display = 'none';
+        document.getElementById('access-btn').style.display = 'none';
+        document.getElementById('lcars-content').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
