@@ -33,31 +33,31 @@
         }
 
         @keyframes warpDrive {
-            0% { left: -160px; top: 23%; opacity: 0; transform: scale(0.6); }
+            0% { left: -280px; top: 20%; opacity: 0; transform: scale(0.7); }
             10% { opacity: 0.6; }
             90% { opacity: 0.6; }
-            100% { left: 100%; top: 33%; opacity: 0; transform: scale(1.0); }
+            100% { left: 100%; top: 30%; opacity: 0; transform: scale(1.1); }
         }
         
-        /* Der Container hält jetzt Schiff UND Text zusammen auf Kurs */
+        /* Container deutlich vergrößert für ein mächtigeres Schiff */
         .defiant-container {
             position: fixed;
-            width: 150px;
+            width: 260px;
             pointer-events: none;
             animation: warpDrive 14s linear infinite;
             z-index: 0;
             text-align: center;
         }
 
-        /* Der synchron mitfliegende Registrierungs-Text */
+        /* Schriftzug vergrößert und fetter für optimale Lesbarkeit */
         .defiant-label {
             color: #5599ff;
             font-family: 'Courier New', monospace;
-            font-size: 11px;
+            font-size: 16px;
             font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-            text-shadow: 0 0 5px rgba(0,85,255,0.8);
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            text-shadow: 0 0 8px rgba(0,85,255,0.9);
             white-space: nowrap;
         }
 
@@ -207,7 +207,6 @@
 <body>
 
 <div class="defiant-container">
-    <!-- Der Name fliegt jetzt unmissverständlich mit -->
     <div class="defiant-label">U.S.S. DEFIANT</div>
     <svg viewBox="0 0 120 80" width="100%" height="auto">
         <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
