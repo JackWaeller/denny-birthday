@@ -33,32 +33,50 @@
         }
 
         @keyframes warpDrive {
-            0% { left: -400px; top: 15%; opacity: 0; transform: scale(0.8); }
-            10% { opacity: 0.65; }
-            90% { opacity: 0.65; }
+            0% { left: -500px; top: 15%; opacity: 0; transform: scale(0.8); }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
             100% { left: 100%; top: 25%; opacity: 0; transform: scale(1.2); }
         }
         
-        /* Gigantischer Container für maximale Sichtbarkeit */
         .defiant-container {
             position: fixed;
-            width: 380px; 
+            width: 450px; 
             pointer-events: none;
-            animation: warpDrive 15s linear infinite;
+            animation: warpDrive 18s linear infinite;
             z-index: 0;
-            text-align: center;
+            display: flex;
+            align-items: center;
         }
 
-        /* Riesiger, unübersehbarer Schriftzug */
+        .ship-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .defiant-label {
             color: #5599ff;
             font-family: 'Courier New', monospace;
-            font-size: 24px; 
+            font-size: 18px; 
             font-weight: bold;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
             text-shadow: 0 0 10px rgba(0,85,255,0.9);
+        }
+
+        /* Das Banner für Maus */
+        .birthday-banner {
+            background-color: #ff3333;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-left: 20px;
             white-space: nowrap;
+            box-shadow: 0 0 15px #ff3333;
+            border: 2px solid #fff;
         }
 
         .lcars-container {
@@ -207,20 +225,23 @@
 <body>
 
 <div class="defiant-container">
-    <div class="defiant-label">U.S.S. DEFIANT</div>
-    <!-- SVG-Breite auf 100% zwingt die Grafik, die vollen 380px des Containers auszufüllen -->
-    <svg viewBox="0 0 120 80" width="100%" height="auto">
-        <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
-        <path d="M 15,45 Q 35,47 55,50 Q 35,43 15,45" fill="#0077ff" opacity="0.6"/>
-        <path d="M 20,32 C 30,32 35,22 45,20 C 55,18 70,22 80,28 C 85,31 105,34 115,40 C 105,46 85,49 80,52 C 70,58 55,62 45,60 C 35,58 30,48 20,48 C 12,48 5,43 5,40 C 5,37 12,32 20,32 Z" fill="#2a3245" stroke="#4a5775" stroke-width="1.5"/>
-        <path d="M 95,37 C 103,37 108,38 112,40 C 108,42 103,43 95,43 Z" fill="#ff7700"/>
-        <rect x="40" y="22" width="25" height="4" rx="1" fill="#ff3300"/>
-        <rect x="40" y="54" width="25" height="4" rx="1" fill="#ff3300"/>
-        <ellipse cx="65" cy="40" rx="12" ry="7" fill="#1f2430" stroke="#3d475e" stroke-width="1"/>
-    </svg>
+    <div class="ship-wrap">
+        <div class="defiant-label">U.S.S. DEFIANT</div>
+        <svg viewBox="0 0 120 80" width="300" height="auto">
+            <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
+            <path d="M 15,45 Q 35,47 55,50 Q 35,43 15,45" fill="#0077ff" opacity="0.6"/>
+            <path d="M 20,32 C 30,32 35,22 45,20 C 55,18 70,22 80,28 C 85,31 105,34 115,40 C 105,46 85,49 80,52 C 70,58 55,62 45,60 C 35,58 30,48 20,48 C 12,48 5,43 5,40 C 5,37 12,32 20,32 Z" fill="#2a3245" stroke="#4a5775" stroke-width="1.5"/>
+            <path d="M 95,37 C 103,37 108,38 112,40 C 108,42 103,43 95,43 Z" fill="#ff7700"/>
+            <rect x="40" y="22" width="25" height="4" rx="1" fill="#ff3300"/>
+            <rect x="40" y="54" width="25" height="4" rx="1" fill="#ff3300"/>
+            <ellipse cx="65" cy="40" rx="12" ry="7" fill="#1f2430" stroke="#3d475e" stroke-width="1"/>
+        </svg>
+    </div>
+    <div class="birthday-banner">Happy Birthday Maus!</div>
 </div>
 
 <div class="lcars-container">
+    <!-- Rest vom Interface bleibt gleich -->
     <div class="lcars-header">
         <span>COM-LINK // SYS-384</span>
         <span class="blink" style="color: #ff3333;">● ONLINE</span>
