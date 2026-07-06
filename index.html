@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starfleet Terminal - Denny</title>
     <style>
-        /* Ein extrem stabiler, animierter Sternenhintergrund aus reinem CSS */
+        /* Stabiler, animierter Sternenhintergrund aus reinem CSS */
         @keyframes spaceTravel {
             from { background-position: 0 0, 50px 100px, 0 150px; }
             to { background-position: 1000px 1000px, 1050px 1100px, 1000px 1150px; }
@@ -21,7 +21,7 @@
                 radial-gradient(2px 2px at 130px 210px, #ffffff, rgba(0,0,0,0)),
                 radial-gradient(3px 3px at 160px 270px, #999999, rgba(0,0,0,0));
             background-size: 200px 200px;
-            animation: spaceTravel 30s linear infinite; /* Sterne fliegen zu 100% ohne Bilder! */
+            animation: spaceTravel 30s linear infinite;
             color: #ff9900;
             font-family: 'Courier New', Courier, monospace;
             padding: 40px 15px;
@@ -33,23 +33,20 @@
             overflow-x: hidden;
         }
 
-        /* Die vorbeifliegende Defiant als stabiler CSS/Text-Warp-Effekt */
+        /* Die vorbeifliegende U.S.S. Defiant (Code-Grafik) */
         @keyframes warpDrive {
-            0% { left: -100px; top: 25%; opacity: 0; transform: scale(0.5); }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { left: 100%; top: 35%; opacity: 0; transform: scale(1.2); }
+            0% { left: -150px; top: 25%; opacity: 0; transform: scale(0.6); }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { left: 100%; top: 35%; opacity: 0; transform: scale(1.0); }
         }
-        .defiant-text {
+        .defiant-container {
             position: fixed;
-            color: #aaccff;
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: -2px;
+            width: 140px;
+            height: auto;
             pointer-events: none;
-            animation: warpDrive 10s linear infinite;
+            animation: warpDrive 12s linear infinite;
             z-index: 0;
-            text-shadow: -10px 0 15px #0055ff;
         }
 
         /* LCARS Rahmen & Gehäuse */
@@ -199,8 +196,18 @@
 </head>
 <body>
 
-<!-- U.S.S. Defiant als textbasiertes Föderationsraumschiff mit Warp-Schweif -->
-<div class="defiant-text">═══► U.S.S. DEFIANT</div>
+<!-- U.S.S. Defiant - SVG Code-Grafik -->
+<div class="defiant-container">
+    <svg viewBox="0 0 120 80" width="100%" height="auto">
+        <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
+        <path d="M 15,45 Q 35,47 55,50 Q 35,43 15,45" fill="#0077ff" opacity="0.6"/>
+        <path d="M 20,32 C 30,32 35,22 45,20 C 55,18 70,22 80,28 C 85,31 105,34 115,40 C 105,46 85,49 80,52 C 70,58 55,62 45,60 C 35,58 30,48 20,48 C 12,48 5,43 5,40 C 5,37 12,32 20,32 Z" fill="#2a3245" stroke="#4a5775" stroke-width="1.5"/>
+        <path d="M 95,37 C 103,37 108,38 112,40 C 108,42 103,43 95,43 Z" fill="#ff7700"/>
+        <rect x="40" y="22" width="25" height="4" rx="1" fill="#ff3300"/>
+        <rect x="40" y="54" width="25" height="4" rx="1" fill="#ff3300"/>
+        <ellipse cx="65" cy="40" rx="12" ry="7" fill="#1f2430" stroke="#3d475e" stroke-width="1"/>
+    </svg>
+</div>
 
 <div class="lcars-container">
     <div class="lcars-header">
@@ -236,14 +243,13 @@
                     Das Programm wird in Kürze in das Terminal deiner Holosuite eingespeist. Lass dir in der Zwischenzeit einen heißen Raktajino servieren und halte deine Brückencrew bereit!
                 </div>
             </div>
-            </div>
 
             <!-- Missionsstatus Box -->
             <div class="status-box">
                 <div class="status-title">═══════════════════════════════════</div>
                 <div class="status-title">MISSIONSSTATUS</div>
                 <div class="status-item checked">☑ Geburtstagsmission gestartet</div>
-                <div class="status-item checked">☑ Commander Denny autorisiert</div>
+                <div class="status-item checked">☑ Commander Denny authorized</div>
                 <div class="status-item checked">☑ Überraschung erfolgreich</div>
                 <div class="status-item unchecked"><span class="blink">☐</span> Holosuite-Programm ausgeliefert</div>
                 <div class="main-text" style="font-size: 12px; color: #a0a0a0; margin-top: 15px; text-align: center;">
@@ -269,20 +275,15 @@
     function playLcarsSound() {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
             [0, 0.12].forEach(delay => {
                 const oscillator = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
-                
                 oscillator.type = 'sine';
                 oscillator.frequency.setValueAtTime(800, audioCtx.currentTime + delay); 
-                
                 gainNode.gain.setValueAtTime(0.6, audioCtx.currentTime + delay); 
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + delay + 0.1);
-                
                 oscillator.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
-                
                 oscillator.start(audioCtx.currentTime + delay);
                 oscillator.stop(audioCtx.currentTime + delay + 0.1);
             });
