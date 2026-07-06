@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starfleet Terminal - Denny</title>
     <style>
-        /* Stabiler, animierter Sternenhintergrund aus reinem CSS */
         @keyframes spaceTravel {
             from { background-position: 0 0, 50px 100px, 0 150px; }
             to { background-position: 1000px 1000px, 1050px 1100px, 1000px 1150px; }
@@ -33,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Die vorbeifliegende U.S.S. Defiant (Code-Grafik) */
         @keyframes warpDrive {
             0% { left: -150px; top: 25%; opacity: 0; transform: scale(0.6); }
             10% { opacity: 0.5; }
@@ -49,7 +47,6 @@
             z-index: 0;
         }
 
-        /* LCARS Rahmen & Gehäuse */
         .lcars-container {
             background-color: #111111;
             border: 4px solid #222222;
@@ -138,7 +135,6 @@
             letter-spacing: 1px;
         }
 
-        /* Missionsstatus Box */
         .status-box {
             border: 1px solid #555555;
             background-color: #111111;
@@ -196,7 +192,6 @@
 </head>
 <body>
 
-<!-- U.S.S. Defiant - SVG Code-Grafik -->
 <div class="defiant-container">
     <svg viewBox="0 0 120 80" width="100%" height="auto">
         <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
@@ -244,7 +239,6 @@
                 </div>
             </div>
 
-            <!-- Missionsstatus Box -->
             <div class="status-box">
                 <div class="status-title">═══════════════════════════════════</div>
                 <div class="status-title">MISSIONSSTATUS</div>
