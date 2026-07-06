@@ -33,23 +33,24 @@
         }
 
         @keyframes warpDrive {
-            0% { left: -500px; top: 15%; opacity: 0; transform: scale(0.8); }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
+            0% { left: -600px; top: 15%; opacity: 0; transform: scale(0.8); }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
             100% { left: 100%; top: 25%; opacity: 0; transform: scale(1.2); }
         }
         
+        /* Container erzwingt nun explizit das Nebeneinander-Layout */
         .defiant-container {
             position: fixed;
-            width: 450px; 
-            pointer-events: none;
-            animation: warpDrive 18s linear infinite;
-            z-index: 0;
             display: flex;
             align-items: center;
+            white-space: nowrap;
+            pointer-events: none;
+            animation: warpDrive 20s linear infinite;
+            z-index: 0;
         }
 
-        .ship-wrap {
+        .ship-group {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -58,25 +59,25 @@
         .defiant-label {
             color: #5599ff;
             font-family: 'Courier New', monospace;
-            font-size: 18px; 
+            font-size: 20px; 
             font-weight: bold;
             letter-spacing: 2px;
             margin-bottom: 5px;
             text-shadow: 0 0 10px rgba(0,85,255,0.9);
         }
 
-        /* Das Banner für Maus */
+        /* Das Banner ist jetzt eine feste Box, die immer sichtbar ist */
         .birthday-banner {
             background-color: #ff3333;
             color: white;
-            padding: 5px 12px;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 16px;
-            margin-left: 20px;
-            white-space: nowrap;
-            box-shadow: 0 0 15px #ff3333;
+            font-size: 22px;
+            margin-left: 30px;
             border: 2px solid #fff;
+            box-shadow: 0 0 20px #ff3333;
+            text-transform: uppercase;
         }
 
         .lcars-container {
@@ -225,7 +226,7 @@
 <body>
 
 <div class="defiant-container">
-    <div class="ship-wrap">
+    <div class="ship-group">
         <div class="defiant-label">U.S.S. DEFIANT</div>
         <svg viewBox="0 0 120 80" width="300" height="auto">
             <path d="M 15,35 Q 35,33 55,30 Q 35,37 15,35" fill="#0077ff" opacity="0.6"/>
@@ -237,11 +238,11 @@
             <ellipse cx="65" cy="40" rx="12" ry="7" fill="#1f2430" stroke="#3d475e" stroke-width="1"/>
         </svg>
     </div>
-    <div class="birthday-banner">Happy Birthday Maus!</div>
+    <div class="birthday-banner">HAPPY BIRTHDAY MAUS!</div>
 </div>
 
 <div class="lcars-container">
-    <!-- Rest vom Interface bleibt gleich -->
+    <!-- Rest vom Interface -->
     <div class="lcars-header">
         <span>COM-LINK // SYS-384</span>
         <span class="blink" style="color: #ff3333;">● ONLINE</span>
