@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starfleet Terminal - Denny</title>
     <style>
+        /* Ein extrem stabiler, animierter Sternenhintergrund aus reinem CSS */
+        @keyframes spaceTravel {
+            from { background-position: 0 0, 50px 100px, 0 150px; }
+            to { background-position: 1000px 1000px, 1050px 1100px, 1000px 1150px; }
+        }
+
         body {
             background-color: #000000;
-            /* Ein echter, fließender Sternenhintergrund als GIF */
-            background-image: url('https://i.postimg.cc/qM0m7v4L/stars-moving.gif');
-            background-size: cover;
-            background-attachment: fixed;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 50px 160px, #dddddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 110px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 210px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 160px 270px, #999999, rgba(0,0,0,0));
+            background-size: 200px 200px;
+            animation: spaceTravel 30s linear infinite; /* Sterne fliegen zu 100% ohne Bilder! */
             color: #ff9900;
             font-family: 'Courier New', Courier, monospace;
             padding: 40px 15px;
@@ -22,20 +33,23 @@
             overflow-x: hidden;
         }
 
-        /* Die vorbeifliegende Defiant als gut sichtbares Bild */
+        /* Die vorbeifliegende Defiant als stabiler CSS/Text-Warp-Effekt */
         @keyframes warpDrive {
-            0% { left: -150px; top: 20%; opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { left: 100%; top: 40%; opacity: 0; }
+            0% { left: -100px; top: 25%; opacity: 0; transform: scale(0.5); }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { left: 100%; top: 35%; opacity: 0; transform: scale(1.2); }
         }
-        .defiant-ship {
+        .defiant-text {
             position: fixed;
-            width: 130px;
-            height: auto;
+            color: #aaccff;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: -2px;
             pointer-events: none;
-            animation: warpDrive 12s linear infinite;
+            animation: warpDrive 10s linear infinite;
             z-index: 0;
+            text-shadow: -10px 0 15px #0055ff;
         }
 
         /* LCARS Rahmen & Gehäuse */
@@ -185,8 +199,8 @@
 </head>
 <body>
 
-<!-- U.S.S. Defiant Bild -->
-<img class="defiant-ship" src="https://i.postimg.cc/mD8v9XF3/defiant-silhouette.png" alt="USS Defiant">
+<!-- U.S.S. Defiant als textbasiertes Föderationsraumschiff mit Warp-Schweif -->
+<div class="defiant-text">═══► U.S.S. DEFIANT</div>
 
 <div class="lcars-container">
     <div class="lcars-header">
@@ -251,12 +265,10 @@
 </div>
 
 <script>
-    // LCARS-Audio-Effekt beim KREATIVEN KLICKEN des Buttons
     function playLcarsSound() {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             
-            // Zweifacher, typischer LCARS-Piepton
             [0, 0.12].forEach(delay => {
                 const oscillator = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
@@ -304,7 +316,7 @@
     setTimeout(playBootAnimation, 400);
 
     function unlockTerminal() {
-        playLcarsSound(); // Sound ertönt HIER beim Klick
+        playLcarsSound();
         logDiv.style.display = 'none';
         document.getElementById('access-btn').style.display = 'none';
         document.getElementById('lcars-content').style.display = 'block';
