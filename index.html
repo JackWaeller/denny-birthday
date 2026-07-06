@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starfleet Terminal - Denny</title>
     <style>
+        /* Sternenhintergrund */
         body {
             background-color: #000000;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
             color: #ff9900;
             font-family: 'Courier New', Courier, monospace;
             padding: 15px;
@@ -15,94 +22,185 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* Die vorbeifliegende Defiant */
+        @keyframes warpDrive {
+            0% { transform: translate(-100w, 20vh) scale(0.1); opacity: 0; }
+            5% { opacity: 0.4; }
+            50% { opacity: 0.4; }
+            95% { opacity: 0; }
+            100% { transform: translate(100vw, 10vh) scale(0.4); opacity: 0; }
+        }
+        .defiant-silhouette {
+            position: fixed;
+            width: 80px;
+            height: auto;
+            pointer-events: none;
+            opacity: 0;
+            animation: warpDrive 25s linear infinite;
+            z-index: 0;
+        }
+
+        /* LCARS Rahmen & Gehäuse */
         .lcars-container {
-            background-color: #000000;
-            border-radius: 15px;
-            padding: 15px;
+            background-color: #111111;
+            border: 4px solid #222222;
+            border-radius: 20px;
+            padding: 20px;
             max-width: 500px;
             width: 100%;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 1;
         }
+        
         .lcars-header {
-            border-bottom: 4px solid #ff9900;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 6px solid #ff9900;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #ffb366;
         }
+
+        .lcars-bar {
+            background-color: #cc6600;
+            height: 12px;
+            border-radius: 0 0 6px 6px;
+            margin-bottom: 15px;
+        }
+
         .terminal-screen {
-            background-color: #080808;
-            border: 1px solid #331100;
+            background-color: #050505;
+            border-left: 18px solid #ff9900; /* Typischer LCARS-Balken links */
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 4px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,1);
         }
+
         .boot-log {
             color: #33ff33;
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.8;
         }
+
+        .blink {
+            animation: lcarsBlink 1.2s steps(2, start) infinite;
+        }
+        @keyframes lcarsBlink { to { opacity: 0; } }
+
         .lcars-interface {
             display: none;
         }
+
         .meta-info {
-            color: #ffcc00;
-            font-size: 14px;
-            margin-bottom: 15px;
-            border-left: 4px solid #cc6600;
-            padding-left: 10px;
-            line-height: 1.4;
+            color: #ffb366;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #444;
+            padding-bottom: 10px;
+            line-height: 1.5;
         }
+
         .main-text {
             color: #ffcc00;
-            line-height: 1.5;
+            line-height: 1.6;
             font-size: 14px;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
+
         .highlight-box {
-            border: 1px solid #ff9900;
-            background-color: #110500;
-            padding: 12px;
-            margin: 15px 0;
+            border: 1px solid #cc6600;
+            background-color: #0c0600;
+            padding: 15px;
+            margin: 20px 0;
             border-radius: 5px;
         }
+
         .highlight-title {
             color: #ff3333;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* Missionsstatus Gimmick Box */
+        .status-box {
+            border: 1px solid #555555;
+            background-color: #111111;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 5px;
+            color: #ffcc00;
+        }
+        .status-title {
+            text-align: center;
+            font-weight: bold;
+            color: #ff9900;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .status-item {
+            margin: 8px 0;
             font-size: 13px;
         }
+        .checked { color: #33ff33; }
+        .unchecked { color: #ff3333; class: blink; }
+
         .btn-terminal {
-            background-color: #cc6600;
+            background-color: #ff9900;
             color: #000000;
             border: none;
-            padding: 12px;
-            font-size: 15px;
+            padding: 14px;
+            font-size: 14px;
             font-weight: bold;
             font-family: 'Courier New', monospace;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
-            margin-top: 15px;
-            box-shadow: 0 4px #883300;
-        }
-        .lcars-footer {
             margin-top: 20px;
-            border-top: 2px solid #cc6600;
+            box-shadow: 0 4px #995500;
+            transition: background 0.2s;
+        }
+        .btn-terminal:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px #995500;
+        }
+
+        .lcars-footer {
+            margin-top: 25px;
+            border-top: 4px solid #cc6600;
             padding-top: 10px;
             font-size: 11px;
-            color: #663300;
+            color: #555555;
             text-align: center;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
+<!-- Defiant fliegt im Hintergrund vorbei -->
+<svg class="defiant-silhouette" viewBox="0 0 100 60" fill="#222233">
+    <path d="M50,0 C65,10 75,15 80,25 C85,35 80,50 75,55 C65,52 55,50 50,53 C45,50 35,52 25,55 C20,50 15,35 20,25 C25,15 35,10 50,0 Z M50,15 C45,25 45,35 50,40 C55,35 55,25 50,15 Z"/>
+</svg>
+
 <div class="lcars-container">
     <div class="lcars-header">
-        🪐 DS9 // OPS TERMINAL // SYS-384
+        <span>COM-LINK // SYS-384</span>
+        <span class="blink" style="color: #ff3333;">● ONLINE</span>
     </div>
+    <div class="lcars-bar"></div>
 
     <div class="terminal-screen">
         <div id="boot-log" class="boot-log">
@@ -111,28 +209,42 @@
 
         <div id="lcars-content" class="lcars-interface">
             <div class="meta-info">
-                <strong>ORT:</strong> Tiefe Raumstation 9 / Promenadendeck<br>
-                <strong>AN:</strong> DENNY (Alles Gute zum Geburtstag!)<br>
-                <strong>VON:</strong> Andy<br>
-                <strong>BETREFF:</strong> Sicherheitsfreigabe für Holosuite 3
+                <strong>ORT:</strong> DEEP SPACE NINE // PROMENADENDECK<br>
+                <strong>AN:</strong> COMMANDER DENNY<br>
+                <strong>VON:</strong> ANDY<br>
+                <strong>BETREFF:</strong> SICHERHEITSFREIGABE HOLOSUITE 3
             </div>
 
             <div class="main-text">
                 Hallo Commander,<br><br>
                 ich habe von Captain Sisko höchstpersönlich die Freigabe erhalten: Für dich wurde eine brandneue, hochentwickelte historische Simulation aus den geschützten Archiven des Sternenflotten-Hauptquartiers freigeschaltet!<br><br>
-                In diesem Programm wirst du im virtuellen 'Captain's Chair' Platz nehmen und das Kommando als je einer der berühmtesten Persönlichkeiten der Galaxis übernehmen – sei es Sisko auf der Defiant, Kanzler Gowron oder andere Ikonen der Geschichte. Du wirst ihre Crews koordinieren, historische Allianzen schmieden und in diesen epochenübergreifenden Manövern beweisen, dass Du das taktische Geschick besitzt, den Alpha-Quadranten zu verteidigen.
+                In diesem Programm wirst du im virtuellen 'Captain's Chair' Platz nehmen und das Kommando über die berühmtesten Brücken der Galaxis übernehmen – sei es Sisko auf der Defiant, Kanzler Gowron oder andere Ikonen der Geschichte. Du wirst ihre damaligen Crews koordinieren, historische Allianzen schmieden und in diesen epochenübergreifenden Manövern beweisen, dass du das taktische Geschick besitzt, den Alpha-Quadranten zu verteidigen. Das Schicksal des Alpha-Quadranten liegt in deiner Hand.
             </div>
 
             <div class="highlight-box">
-                <div class="highlight-title">⚠️ WICHTIGER FREIGABE-STATUS:</div>
+                <div class="highlight-title">⚠️ SYSTEM-NOTIZ // LIEFERENGPASS:</div>
                 <div class="main-text" style="color: #ffb366; font-size: 13px; margin-bottom: 0;">
                     Leider verzögert sich der Start der Simulation um ein paar Umdrehungen der Station. Es gibt ein massives Problem in der Lieferkette: Quark wollte die Daten-Disks über den Gamma-Quadranten schmuggeln, um die Zollgebühren der Föderation zu umgehen. Odo hat die Fracht wegen „akutem Schmuggelverdacht“ vorübergehend im Sicherheitsbüro konfisziert und verhört Quark nun schon seit Stunden.<br><br>
-                    Jadzya Dax meinte zwar, wir sollten einfach die Schleusentore hacken, aber Chief O'Brien versucht es lieber auf die legale Weise und kalibriert die Subraum-Phalanx neu, um eine Sicherheitskopie direkt aus dem Sternenflotten-Hauptquartier anzufordern.<br><br>
-                    Das Programm solle in Kürze in deiner Holosuite bereitstehen. Lass dir in der Zwischenzeit einen heißen Raktajino servieren und halte deine Brückencrew bereit!
+                    Jadzia Dax meinte zwar, wir sollten einfach die Schleusentore hacken, aber Chief O'Brien versucht es lieber auf die legale Weise und kalibriert die Subraum-Phalanx neu, um eine Sicherheitskopie direkt aus dem Sternenflotten-Hauptquartier anzufordern.<br><br>
+                    Das Programm materialisiert sich in Kürze in deiner Holosuite. Lass dir in der Zwischenzeit ein heißes Raktajino servieren und halte deine Brückencrew bereit!
                 </div>
             </div>
+
+            <!-- Missionsstatus Gimmick -->
+            <div class="status-box">
+                <div class="status-title">═══════════════════════════════════</div>
+                <div class="status-title">MISSIONSSTATUS</div>
+                <div class="status-item class="checked">☑ Geburtstagsmission gestartet</div>
+                <div class="status-item class="checked">☑ Commander Denny autorisiert</div>
+                <div class="status-item class="checked">☑ Überraschung erfolgreich</div>
+                <div class="status-item unchecked"><span class="blink">☐</span> Holosuite-Programm ausgeliefert</div>
+                <div class="main-text" style="font-size: 12px; color: #a0a0a0; margin-top: 15px; text-align: center;">
+                    Bitte haben Sie noch etwas Geduld.<br>Chief O'Brien arbeitet bereits daran.
+                </div>
+                <div class="status-title" style="margin-bottom: 0;">═══════════════════════════════════</div>
+            </div>
             
-            <div style="text-align: center; color: #ff9900; font-weight: bold; padding: 5px 0;">
+            <div style="text-align: center; color: #ff9900; font-weight: bold; padding: 20px 0 5px 0; letter-spacing: 1px;">
                 🖖 LEBE LANG UND IN FRIEDEN.
             </div>
         </div>
@@ -141,11 +253,35 @@
     <button id="access-btn" class="btn-terminal" style="display: none;" onclick="unlockTerminal()">Terminal freischalten</button>
 
     <div class="lcars-footer">
-        COMPUTER-EINTRAG ERGÄNZEN // ID 02-2687 // MÖGE DEIN NEUES LEBENSJAHR VOLLER SCHÖNER MOMENTE SEIN UND DIE PROPHETEN DICH AUF VIELE SCHÖNE REISEN FÜHREN :)
+        STERNENZEIT: 50924.4 // DATA-ID 02-2687 // MÖGE DEIN NEUES LEBENSJAHR VOLL TIEFE SEIN.
     </div>
 </div>
 
 <script>
+    // Synthetischer LCARS-Audio-Effekt via Web Audio API
+    function playLcarsSound() {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(680, audioCtx.currentTime); // LCARS Beep Frequenz
+            oscillator.frequency.exponentialRampToValueAtTime(420, audioCtx.currentTime + 0.12);
+            
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.12);
+        } catch (e) {
+            console.log("Audio blockiert oder nicht unterstützt.");
+        }
+    }
+
     const bootLines = [
         "Verbindung zum Ops-Server...",
         "Biometrische Daten verifiziert.",
@@ -163,20 +299,17 @@
         if (lineIndex < bootLines.length) {
             logDiv.innerHTML += bootLines[lineIndex] + "<br>";
             lineIndex++;
-            setTimeout(playBootAnimation, 450);
+            setTimeout(playBootAnimation, 500);
         } else {
             document.getElementById('access-btn').style.display = 'block';
         }
     }
     
-    setTimeout(playBootAnimation, 300);
+    setTimeout(playBootAnimation, 400);
 
     function unlockTerminal() {
+        playLcarsSound(); // Sound abspielen
         logDiv.style.display = 'none';
         document.getElementById('access-btn').style.display = 'none';
         document.getElementById('lcars-content').style.display = 'block';
     }
-</script>
-
-</body>
-</html>
