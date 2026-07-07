@@ -2,72 +2,51 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Defiant-Terminal</title>
+    <title>Defiant Mission</title>
     <style>
-        body { margin: 0; background: #000; overflow: hidden; font-family: 'Courier New', monospace; }
-        
-        /* Hintergrund-Sterne */
+        body { 
+            margin: 0; background: #000; overflow: hidden; 
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Sterne als echtes Hintergrundbild, damit sie nicht verschoben werden */
         .stars { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px);
-            background-size: 500px 500px; z-index: 0;
+            position: fixed; width: 100%; height: 100%; z-index: 0;
+            background-image: radial-gradient(white, rgba(255,255,255,.2) 1px, transparent 30px);
+            background-size: 100px 100px;
         }
 
-        /* Wurmloch */
-        .wormhole { 
-            position: absolute; top: 50%; left: 50%; width: 300px; height: 300px; 
-            background: radial-gradient(circle, #4a0082, #000); border-radius: 50%; 
-            transform: translate(-50%, -50%); filter: blur(60px); opacity: 0.5; z-index: 1;
+        /* Flugbahn: Fixe Position, keine Flexbox! */
+        .ship-container {
+            position: absolute; top: 30%; left: -500px;
+            animation: flight 15s linear infinite;
+            z-index: 2;
         }
+        @keyframes flight { from { left: -500px; } to { left: 110%; } }
 
-        /* Flug-Container für Defiant und Banner */
-        .flight-path { 
-            position: absolute; top: 30%; display: flex; align-items: center; 
-            animation: move 20s linear infinite; z-index: 2; 
-        }
-        @keyframes move { from { left: -800px; } to { left: 120%; } }
-
+        /* Schiff und Banner einfach nebeneinander als Inline-Elemente */
+        .ship { display: inline-block; width: 80px; height: 30px; background: #0077ff; }
         .banner { 
-            background: #ff3333; color: white; padding: 10px 20px; font-weight: bold; 
-            border-radius: 5px; margin-left: 20px; border: 2px solid white; white-space: nowrap; 
+            display: inline-block; background: #ff3333; color: #fff; 
+            padding: 10px; font-weight: bold; margin-left: 10px; 
         }
 
-        /* Das Terminal-Interface */
-        .console { 
-            position: absolute; top: 50px; left: 50px; background: #111; border: 3px solid #ff9900; 
-            padding: 20px; color: #ff9900; z-index: 10; width: 300px;
-        }
-        .hidden { display: none; }
+        .console { position: absolute; top: 50px; left: 50px; color: #ff9900; z-index: 10; }
     </style>
 </head>
 <body>
 
     <div class="stars"></div>
-    <div class="wormhole"></div>
 
-    <div class="flight-path">
-        <div style="width:60px; height:30px; background:#0077ff;"></div>
+    <div class="ship-container">
+        <div class="ship"></div>
         <div class="banner">HAPPY BIRTHDAY MAUS!</div>
     </div>
 
     <div class="console">
-        <div id="status">STATUS: PADD BEREIT</div>
-        <button id="start-btn" onclick="activateTerminal()" style="width:100%; margin-top:10px; cursor:pointer;">TERMINAL STARTEN</button>
-        <div id="terminal-content" class="hidden" style="margin-top:15px; border-top:1px solid #ff9900; pt:10px;">
-            <p>ZUGRIFF ERFOLGREICH!</p>
-            <p>Systeme der Defiant synchronisiert.</p>
-            <p>Mission für Commander Maus aktiv.</p>
-        </div>
+        <div id="status">STATUS: BEREIT</div>
+        <button onclick="document.getElementById('status').innerText='MISSION AKTIV'">TERMINAL STARTEN</button>
     </div>
-
-    <script>
-        function activateTerminal() {
-            // Zeige den versteckten Text-Bereich an
-            document.getElementById('terminal-content').classList.remove('hidden');
-            document.getElementById('start-btn').style.display = 'none';
-            document.getElementById('status').innerHTML = "STATUS: ONLINE // MISSION AKTIV";
-        }
-    </script>
 
 </body>
 </html>
